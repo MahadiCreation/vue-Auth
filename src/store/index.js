@@ -20,5 +20,13 @@ export default createStore({
         SET_USER(state, user){
             state.user = user
         }
+    },
+    actions:{
+        authUser({commit}){
+           // let auth = localStorage.getItem('auth');
+            let getUser = localStorage.getItem('userData')
+            commit('SET_AUTHHENTICATED', true);
+            commit('SET_USER', JSON.parse(getUser));
+        }
     }
 })

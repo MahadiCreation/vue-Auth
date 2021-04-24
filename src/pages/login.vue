@@ -35,8 +35,8 @@ export default {
     data(){
         return{
             form:{
-                username:'',
-                password:''
+                username:'tsakib360',
+                password:'sakib123#@'
             },
             isLoading:false,
             errorMessage:'',
@@ -49,6 +49,9 @@ export default {
                 this.isLoading = false
                 this.$store.commit('SET_USER', res.data);
                 this.$store.commit('SET_AUTHHENTICATED', true);
+                localStorage.setItem('userData',JSON.stringify(res.data))
+                localStorage.setItem('auth', true)
+                localStorage.setItem('token', res.data.token)
                 this.$router.push({name:'dashboard'})
             }).catch(e=>{
                 this.isLoading = false

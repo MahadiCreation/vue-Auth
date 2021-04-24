@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import Store from '../store'
 import Login from "../pages/login";
 import Home from '../pages/home'
 import Dashboard from '../pages/dashboard'
@@ -11,6 +12,15 @@ const routes = [
       meta: {
         title: "login",
       },
+      beforeEnter: (to, from, next)=>{
+          if(Store.getters.getAuthenticated){
+            return next({
+                 name:'dashboard'
+             }) 
+          }else{
+              next()
+          }
+      }
     },
     {
       path: "/",
@@ -27,6 +37,15 @@ const routes = [
       meta: {
         title: "dashboard",
       },
+      beforeEnter: (to, from, next)=>{
+          if(!Store.getters.getAuthenticated){
+            return next({
+                 name:'login'
+             }) 
+          }else{
+              next()
+          }
+      }
     },
 ];
 const router = createRouter({
